@@ -1,0 +1,37 @@
+﻿@page
+@model PoeAgriEnergyConnect.Pages.Farm.AddProductModel
+@{
+    ViewData["Title"] = "Add New Product";
+}
+
+
+<h2>@ViewData["Title"]</h2>
+
+
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Product.Name" class="control-label"></label>
+        <input asp-for="Product.Name" class="form-control" />
+        <span asp-validation-for="Product.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.Category" class="control-label"></label>
+        <input asp-for="Product.Category" class="form-control" />
+        <span asp-validation-for="Product.Category" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Product.ProductionDate" class="control-label"></label>
+        <input asp-for="Product.ProductionDate" class="form-control" type="date" />
+        <span asp-validation-for="Product.ProductionDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Add Product</button>
+        <a asp-page="/Farmers/ProductList" class="btn btn-secondary">View Product List</a>
+        <a asp-page="/Account/Login" class="btn btn-secondary">Back</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,62 @@
+﻿@page
+@model PoeAgriEnergyConnect.Pages.Employees.FarmerListModel
+@{
+    <h2>@ViewData["Title"]</h2>
+}
+
+<h2>@ViewData["Title"]</h2>
+
+
+<form method="get">
+    <div class="form-group mb-3">
+        <label for="FarmerId">Select Farmer</label>
+        <select asp-for="FarmerId" asp-items="Model.FarmerList" class="form-control" onchange="this.form.submit()">
+            <option value="">-- Select Farmer --</option>
+        </select>
+    </div>
+</form>
+
+
+<a asp-page="/Employees/AddFarmer" class="btn btn-secondary ">Back</a>
+
+@if (Model.SelectedFarmer != null)
+{
+    <form method="get">
+        <input type="hidden" name="FarmerId" value="@Model.FarmerId" />
+        <div class="form-group">
+            <label for="ProductType">Product Type</label>
+            <input type="text" name="ProductType" value="@Model.ProductType" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="StartDate">Start Date</label>
+            <input type="date" name="StartDate" value="@Model.StartDate?.ToString("yyyy-MM-dd")" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="EndDate">End Date</label>
+            <input type="date" name="EndDate" value="@Model.EndDate?.ToString("yyyy-MM-dd")" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Production Date</th>
+              @*   <th>Farmer</th> *@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Category</td>
+                    <td>@product.ProductionDate.ToShortDateString()</td>
+                    @* <td>@product.Farmer.Name</td> *@
+                </tr>
+            }
+        </tbody>
+    </table>
+}
